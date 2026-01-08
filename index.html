@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Undangan Pernikahan Savista & Arifin - Cinta Abadi</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,6 +27,8 @@
             color: var(--light); 
             overflow-x: hidden;
             scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
         }
         
         .font-serif { font-family: 'Playfair Display', serif; }
@@ -34,23 +36,73 @@
         .font-dancing { font-family: 'Dancing Script', cursive; }
         .font-cormorant { font-family: 'Cormorant Garamond', serif; }
         
-        /* Overlay Style */
+        /* Responsive Typography */
+        html {
+            font-size: 14px;
+        }
+        
+        @media (min-width: 640px) {
+            html {
+                font-size: 15px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            html {
+                font-size: 16px;
+            }
+        }
+        
+        /* Touch-friendly elements */
+        button, 
+        .accent-button,
+        .glass-card,
+        .envelope,
+        .rsvp-option,
+        .gift-item {
+            touch-action: manipulation;
+            cursor: pointer;
+        }
+        
+        /* Mobile-optimized section padding */
+        section {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        
+        @media (min-width: 640px) {
+            section {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            section {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+        
+        /* Overlay Style - Mobile Optimized */
         #cover-overlay {
             position: fixed; 
             top: 0; 
             left: 0; 
             width: 100%; 
             height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(60, 40, 60, 0.9)), 
+            background: linear-gradient(rgba(0,0,0,0.92), rgba(60, 40, 60, 0.95)), 
                         url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=2070');
             background-size: cover; 
             background-position: center;
+            background-attachment: fixed;
             z-index: 200; 
             display: flex; 
             align-items: center; 
             justify-content: center;
             transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             overflow: hidden;
+            padding: 1.5rem;
         }
         
         #cover-overlay::before {
@@ -64,7 +116,7 @@
             z-index: -1;
         }
 
-        /* Particles */
+        /* Mobile-first particles */
         #particles-js { 
             position: fixed; 
             width: 100%; 
@@ -73,21 +125,23 @@
             pointer-events: none; 
         }
 
+        /* Glass card with mobile optimization */
         .glass-card { 
             background: rgba(255, 255, 255, 0.08); 
             backdrop-filter: blur(12px); 
             border: 1px solid rgba(255, 255, 255, 0.15); 
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             transition: all 0.3s ease;
         }
         
         .glass-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             border-color: var(--gold);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
         }
         
+        /* Mobile-optimized buttons */
         .accent-button { 
             background: linear-gradient(135deg, var(--gold) 0%, #e6b85c 100%); 
             color: var(--olive); 
@@ -96,6 +150,25 @@
             box-shadow: 0 4px 15px rgba(245, 215, 110, 0.3);
             position: relative;
             overflow: hidden;
+            min-height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.95rem;
+            border: none;
+            outline: none;
+        }
+        
+        @media (min-width: 768px) {
+            .accent-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+        
+        .accent-button:active {
+            transform: scale(0.98);
         }
         
         .accent-button::after {
@@ -109,36 +182,46 @@
             transition: left 0.7s;
         }
         
-        .accent-button:hover::after {
+        .accent-button:hover::after,
+        .accent-button:focus::after {
             left: 100%;
         }
         
-        .accent-button:hover { 
-            transform: translateY(-3px); 
+        .accent-button:hover,
+        .accent-button:focus { 
+            transform: translateY(-2px); 
             filter: brightness(1.1); 
-            box-shadow: 0 8px 20px rgba(245, 215, 110, 0.4);
+            box-shadow: 0 6px 18px rgba(245, 215, 110, 0.4);
         }
 
+        /* Mobile music player */
         .vinyl-record {
-            width: 60px; 
-            height: 60px; 
+            width: 50px; 
+            height: 50px; 
             background: radial-gradient(circle at 30% 30%, #222, #000); 
             border-radius: 50%;
-            border: 3px solid var(--gold); 
+            border: 2px solid var(--gold); 
             display: flex; 
             align-items: center; 
             justify-content: center;
             animation: spin 8s linear infinite; 
             cursor: pointer; 
             z-index: 60;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        @media (min-width: 768px) {
+            .vinyl-record {
+                width: 60px;
+                height: 60px;
+            }
         }
         
         .vinyl-record::before {
             content: '';
             position: absolute;
-            width: 15px;
-            height: 15px;
+            width: 12px;
+            height: 12px;
             background: var(--gold);
             border-radius: 50%;
             z-index: 2;
@@ -151,63 +234,97 @@
             to { transform: rotate(360deg); } 
         }
         
+        /* Optimized floating animation for mobile */
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-10px); }
         }
         
         @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 10px rgba(245, 215, 110, 0.5); }
-            50% { box-shadow: 0 0 25px rgba(245, 215, 110, 0.8); }
+            0%, 100% { box-shadow: 0 0 8px rgba(245, 215, 110, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(245, 215, 110, 0.7); }
         }
         
-        .floating { animation: float 5s ease-in-out infinite; }
-        .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+        .floating { 
+            animation: float 5s ease-in-out infinite; 
+            will-change: transform;
+        }
+        
+        .pulse-glow { 
+            animation: pulse-glow 2s ease-in-out infinite; 
+            will-change: box-shadow;
+        }
 
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+        /* Better scrollbar for mobile */
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 6px; }
         
-        .heart {
-            color: var(--rose);
-            text-shadow: 0 0 10px rgba(248, 165, 194, 0.7);
-        }
-        
+        /* Section title responsive */
         .section-title {
             position: relative;
             display: inline-block;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            line-height: 1.2;
+        }
+        
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 3.5rem;
+                margin-bottom: 3rem;
+            }
         }
         
         .section-title::after {
             content: '';
             position: absolute;
             width: 60%;
-            height: 3px;
+            height: 2px;
             background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            bottom: -10px;
+            bottom: -8px;
             left: 20%;
         }
         
+        /* Couple photo responsive */
         .couple-photo {
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
-            border: 5px solid var(--gold);
-            box-shadow: 0 0 30px rgba(245, 215, 110, 0.5);
+            border: 4px solid var(--gold);
+            box-shadow: 0 0 25px rgba(245, 215, 110, 0.5);
+            margin: 0 auto 2rem;
+            overflow: hidden;
         }
         
+        @media (min-width: 640px) {
+            .couple-photo {
+                width: 220px;
+                height: 220px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .couple-photo {
+                width: 250px;
+                height: 250px;
+            }
+        }
+        
+        /* Timeline responsive */
         .timeline-item {
             position: relative;
-            padding-left: 30px;
-            margin-bottom: 30px;
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
         }
         
         .timeline-item::before {
             content: '';
             position: absolute;
             left: 0;
-            top: 0;
-            width: 15px;
-            height: 15px;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
             background: var(--gold);
             border-radius: 50%;
         }
@@ -215,95 +332,60 @@
         .timeline-item::after {
             content: '';
             position: absolute;
-            left: 7px;
-            top: 15px;
+            left: 5.5px;
+            top: 1.5rem;
             width: 1px;
-            height: calc(100% + 15px);
+            height: calc(100% + 0.5rem);
             background: rgba(245, 215, 110, 0.5);
         }
         
-        .timeline-item:last-child::after {
-            display: none;
-        }
-        
+        /* Map container responsive */
         .map-container {
-            border-radius: 15px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 2px solid rgba(245, 215, 110, 0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            border: 1px solid rgba(245, 215, 110, 0.3);
+            height: 300px;
         }
         
-        .floral-divider {
-            position: relative;
-            height: 40px;
-            margin: 40px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        @media (min-width: 768px) {
+            .map-container {
+                height: 400px;
+                border-radius: 15px;
+            }
         }
         
-        .floral-divider::before,
-        .floral-divider::after {
-            content: '❦';
-            color: var(--gold);
-            font-size: 24px;
-            margin: 0 15px;
-        }
-        
-        .floral-divider > div {
-            width: 100px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-        }
-        
-        .love-note {
-            background: linear-gradient(135deg, rgba(248, 165, 194, 0.1), rgba(245, 215, 110, 0.1));
-            border-left: 4px solid var(--rose);
-            padding: 20px;
-            border-radius: 0 15px 15px 0;
-            font-style: italic;
-        }
-        
-        .gallery-item {
-            overflow: hidden;
-            border-radius: 15px;
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .gallery-item img {
-            transition: transform 0.5s ease;
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-        
-        .gallery-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.7));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .gallery-item:hover::after {
-            opacity: 1;
-        }
-        
-        /* PERBAIKAN UTAMA: Envelope dan Love Letter - Diperbaiki agar tidak terpotong */
+        /* Envelope responsive design */
         .envelope {
             position: relative;
             width: 100%;
-            max-width: 450px;
-            height: 320px;
-            margin: 0 auto 40px;
-            perspective: 1000px;
+            max-width: 400px;
+            height: 280px;
+            margin: 0 auto 2rem;
+            perspective: 800px;
             cursor: pointer;
+            touch-action: manipulation;
+        }
+        
+        @media (min-width: 480px) {
+            .envelope {
+                max-width: 350px;
+                height: 260px;
+            }
+        }
+        
+        @media (min-width: 640px) {
+            .envelope {
+                max-width: 420px;
+                height: 300px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .envelope {
+                max-width: 450px;
+                height: 320px;
+            }
         }
         
         .envelope-front, .envelope-back {
@@ -311,8 +393,8 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg, #f5d76e, #e6b85c);
-            border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -353,202 +435,383 @@
             height: 50%;
             background: linear-gradient(135deg, #e6b85c, #d4a44e);
             clip-path: polygon(0 0, 50% 100%, 100% 0);
-            border-radius: 12px 12px 0 0;
+            border-radius: 10px 10px 0 0;
             z-index: 3;
         }
         
-        /* PERBAIKAN UTAMA: Love Letter - Diperbaiki agar konten dapat terbaca semua */
+        /* Love letter responsive */
         .love-letter {
             position: relative;
-            width: 90%;
-            height: 90%;
+            width: 92%;
+            height: 92%;
             background: var(--light);
-            border-radius: 8px;
+            border-radius: 6px;
             z-index: 1;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
             color: var(--olive);
-            padding: 25px;
+            padding: 1.25rem;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             overflow-y: auto;
             overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
         }
         
         .love-letter h3 {
             font-family: 'Dancing Script', cursive;
             color: var(--rose);
-            font-size: 28px;
-            margin-bottom: 15px;
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
             line-height: 1.2;
         }
         
         .love-letter p {
-            line-height: 1.6;
-            margin-bottom: 12px;
-            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
             text-align: center;
             width: 100%;
         }
         
-        /* Scrollbar untuk love-letter */
-        .love-letter::-webkit-scrollbar {
-            width: 4px;
-        }
-        
-        .love-letter::-webkit-scrollbar-track {
-            background: rgba(245, 215, 110, 0.1);
-            border-radius: 10px;
-        }
-        
-        .love-letter::-webkit-scrollbar-thumb {
-            background: var(--gold);
-            border-radius: 10px;
-        }
-        
-        /* Animasi khusus untuk membuka amplop */
-        @keyframes openEnvelope {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .envelope.open {
-            animation: openEnvelope 0.5s ease;
-        }
-        
-        /* Efek saat hover */
-        .envelope:hover .envelope-flap {
-            transform: translateY(-5px);
-            transition: transform 0.3s ease;
-        }
-        
-        /* Tambahan style untuk responsif */
-        @media (max-width: 768px) {
-            .envelope {
-                max-width: 380px;
-                height: 280px;
-            }
-            
-            .love-letter {
-                padding: 20px;
-            }
-            
+        @media (min-width: 640px) {
             .love-letter h3 {
-                font-size: 24px;
+                font-size: 1.75rem;
             }
             
             .love-letter p {
-                font-size: 14px;
+                font-size: 0.9rem;
             }
         }
         
-        @media (max-width: 480px) {
-            .envelope {
-                max-width: 320px;
-                height: 240px;
-            }
-            
+        @media (min-width: 768px) {
             .love-letter {
-                padding: 15px;
+                padding: 1.5rem;
             }
             
             .love-letter h3 {
-                font-size: 22px;
+                font-size: 2rem;
             }
             
             .love-letter p {
-                font-size: 13px;
-                line-height: 1.5;
+                font-size: 0.95rem;
             }
         }
         
-        /* Garis dekoratif pada surat */
-        .love-letter::before {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
-            border: 1px solid rgba(245, 215, 110, 0.3);
-            border-radius: 4px;
-            pointer-events: none;
-        }
-        
-        /* Header surat yang lebih menarik */
-        .letter-header {
-            position: relative;
-            width: 100%;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(248, 165, 194, 0.3);
-        }
-        
-        /* Signature style */
+        /* Signature responsive */
         .signature {
             font-family: 'Dancing Script', cursive;
-            font-size: 24px;
+            font-size: 1.5rem;
             color: var(--olive);
-            margin-top: 10px;
+            margin-top: 0.5rem;
         }
         
-        .signature-container {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px dashed rgba(245, 215, 110, 0.5);
-            width: 100%;
-        }
-
-        /* Gift Registry Section */
-        .gift-item {
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
+        @media (min-width: 768px) {
+            .signature {
+                font-size: 1.75rem;
+            }
         }
         
-        .gift-item:hover {
-            border-color: var(--gold);
-            transform: translateY(-5px);
-        }
-        
-        /* RSVP Section */
-        .rsvp-option {
-            transition: all 0.3s ease;
+        /* Gallery responsive */
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 12px;
+            position: relative;
             cursor: pointer;
         }
         
-        .rsvp-option:hover {
-            transform: translateY(-3px);
-            border-color: var(--gold) !important;
-        }
-        
-        .rsvp-option.selected {
-            border-color: var(--gold) !important;
-            background: rgba(245, 215, 110, 0.1);
-        }
-        
-        /* Countdown Animation */
-        .countdown-number {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .countdown-number::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        .gallery-item img {
+            transition: transform 0.5s ease;
             width: 100%;
             height: 100%;
-            background: linear-gradient(transparent, rgba(245, 215, 110, 0.1), transparent);
-            transform: translateY(-100%);
-            transition: transform 0.5s ease;
+            object-fit: cover;
         }
         
-        .countdown-number.changed::before {
-            transform: translateY(100%);
+        /* RSVP grid responsive */
+        .rsvp-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+        
+        @media (min-width: 480px) {
+            .rsvp-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* Form inputs responsive */
+        input, select, textarea {
+            font-size: 16px !important; /* Prevents zoom on iOS */
+            min-height: 48px;
+        }
+        
+        textarea {
+            min-height: 120px;
+        }
+        
+        /* Main header responsive */
+        header h1 {
+            font-size: 3rem;
+            line-height: 1;
+        }
+        
+        @media (min-width: 480px) {
+            header h1 {
+                font-size: 3.5rem;
+            }
+        }
+        
+        @media (min-width: 640px) {
+            header h1 {
+                font-size: 4.5rem;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            header h1 {
+                font-size: 5rem;
+            }
+        }
+        
+        /* Countdown responsive */
+        .countdown-item {
+            width: 70px;
+            padding: 0.75rem 0.5rem;
+        }
+        
+        @media (min-width: 480px) {
+            .countdown-item {
+                width: 80px;
+            }
+        }
+        
+        @media (min-width: 640px) {
+            .countdown-item {
+                width: 90px;
+                padding: 1rem 0.5rem;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .countdown-item {
+                width: 100px;
+            }
+        }
+        
+        /* Grid columns responsive */
+        .responsive-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .responsive-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+        
+        /* Gift items responsive */
+        .gift-items-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .gift-items-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* Gallery grid responsive */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+        
+        .gallery-grid .col-span-2 {
+            grid-column: span 2;
+        }
+        
+        @media (min-width: 640px) {
+            .gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1rem;
+            }
+            
+            .gallery-grid .col-span-2 {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+        }
+        
+        /* Social icons responsive */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        /* Footer fixed elements for mobile */
+        .fixed-bottom-right {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 50;
+        }
+        
+        .fixed-bottom-left {
+            position: fixed;
+            bottom: 1rem;
+            left: 1rem;
+            z-index: 50;
+        }
+        
+        @media (min-width: 768px) {
+            .fixed-bottom-right {
+                bottom: 2rem;
+                right: 2rem;
+            }
+            
+            .fixed-bottom-left {
+                bottom: 2rem;
+                left: 2rem;
+            }
+        }
+        
+        /* Mobile menu/actions */
+        .mobile-action-button {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        
+        /* Prevent text selection on interactive elements */
+        .no-select {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        
+        /* Smooth transitions */
+        .smooth-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Optimize images */
+        img {
+            max-width: 100%;
+            height: auto;
+            vertical-align: middle;
+        }
+        
+        /* Hide scrollbar for envelope on mobile */
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* Mobile-specific adjustments */
+        @media (max-width: 767px) {
+            /* Reduce padding on mobile */
+            .mobile-px-4 {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            
+            /* Stack elements vertically */
+            .mobile-stack {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            /* Center text on mobile */
+            .mobile-text-center {
+                text-align: center;
+            }
+            
+            /* Full width on mobile */
+            .mobile-full-width {
+                width: 100% !important;
+            }
+            
+            /* Smaller font sizes */
+            .mobile-text-sm {
+                font-size: 0.875rem;
+            }
+            
+            .mobile-text-lg {
+                font-size: 1.125rem;
+            }
+            
+            .mobile-text-xl {
+                font-size: 1.5rem;
+            }
+            
+            /* Reduce margin on mobile */
+            .mobile-mb-4 {
+                margin-bottom: 1rem;
+            }
+            
+            .mobile-mb-8 {
+                margin-bottom: 2rem;
+            }
+            
+            /* Hide elements on mobile if needed */
+            .mobile-hide {
+                display: none;
+            }
+            
+            /* Show elements only on mobile */
+            .mobile-only {
+                display: block;
+            }
+            
+            .desktop-only {
+                display: none;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .mobile-only {
+                display: none;
+            }
+            
+            .desktop-only {
+                display: block;
+            }
+        }
+        
+        /* Safe area for notched devices */
+        .safe-area-padding {
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+        }
+        
+        /* Performance optimizations */
+        .will-change-transform {
+            will-change: transform;
+        }
+        
+        .will-change-opacity {
+            will-change: opacity;
         }
     </style>
 </head>
@@ -557,123 +820,128 @@
 
     <!-- Cover Overlay -->
     <div id="cover-overlay">
-        <div class="text-center p-8 max-w-2xl" data-aos="zoom-in" data-aos-duration="1500">
-            <div class="floral-divider mb-6">
+        <div class="text-center p-6 max-w-2xl mobile-px-4" data-aos="zoom-in" data-aos-duration="1200">
+            <div class="floral-divider mb-6 mobile-mb-4">
                 <div></div>
             </div>
             
-            <p class="uppercase tracking-[0.4em] mb-6 text-sm text-[#f5d76e]">Kepada Yang Terhormat</p>
-            <h1 class="text-7xl md:text-8xl font-dancing mb-2 text-white">Savista & Arifin</h1>
-            <p class="italic mb-8 opacity-90 font-cormorant text-xl">"Dalam lembaran hidup yang baru, kami berjalan beriringan"</p>
+            <p class="uppercase tracking-[0.3em] mb-4 text-xs text-[#f5d76e] mobile-text-sm">Kepada Yang Terhormat</p>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-dancing mb-2 text-white mobile-text-xl">Savista & Arifin</h1>
+            <p class="italic mb-6 opacity-90 font-cormorant text-lg mobile-text-sm">"Dalam lembaran hidup yang baru, kami berjalan beriringan"</p>
             
-            <div class="mb-10">
-                <p class="font-cormorant text-lg mb-2">Bapak/Ibu/Saudara/i</p>
-                <p class="text-sm opacity-80 max-w-md mx-auto">Dengan penuh rasa syukur dan bahagia, kami mengundang Anda untuk hadir dalam acara pernikahan kami</p>
+            <div class="mb-8">
+                <p class="font-cormorant text-base mb-2 mobile-text-sm">Bapak/Ibu/Saudara/i</p>
+                <p class="text-sm opacity-80 max-w-md mx-auto mobile-text-sm">Dengan penuh rasa syukur dan bahagia, kami mengundang Anda untuk hadir dalam acara pernikahan kami</p>
             </div>
             
-            <div class="flex justify-center mb-10">
+            <div class="flex justify-center mb-8">
                 <div class="flex items-center">
-                    <div class="w-4 h-4 rounded-full bg-[#f5d76e] mr-3 pulse-glow"></div>
-                    <p class="font-cormorant text-lg">12 Desember 2026</p>
+                    <div class="w-3 h-3 rounded-full bg-[#f5d76e] mr-3 pulse-glow"></div>
+                    <p class="font-cormorant text-base mobile-text-sm">12 Desember 2026</p>
                 </div>
             </div>
             
-            <button onclick="openInvitation()" class="accent-button px-10 py-4 rounded-full flex items-center gap-3 mx-auto text-lg group">
+            <button onclick="openInvitation()" class="accent-button px-8 py-4 rounded-full flex items-center gap-3 mx-auto text-base group mobile-full-width mobile-text-sm justify-center">
                 <span class="transition-transform duration-300 group-hover:rotate-90">💌</span> 
                 <span>BUKA UNDANGAN</span>
                 <span class="transition-transform duration-300 group-hover:translate-x-2">→</span>
             </button>
             
-            <div class="floral-divider mt-10">
+            <div class="floral-divider mt-8">
                 <div></div>
             </div>
+            
+            <!-- Mobile hint -->
+            <p class="text-xs opacity-60 mt-8 mobile-only animate-pulse">
+                <i class="fas fa-hand-point-up mr-2"></i>Ketuk untuk membuka undangan
+            </p>
         </div>
     </div>
 
     <!-- Main Content -->
     <div id="main-content" class="opacity-0 transition-opacity duration-1000">
         <!-- Header with Countdown -->
-        <header class="relative min-h-screen flex flex-col items-center justify-center text-center p-6 pt-20 overflow-hidden">
+        <header class="relative min-h-screen flex flex-col items-center justify-center text-center p-4 pt-16 overflow-hidden safe-area-padding">
             <div class="absolute inset-0 z-0">
-                <div class="absolute top-10 left-10 w-20 h-20 rounded-full bg-gradient-to-r from-[#f5d76e]/10 to-transparent blur-xl"></div>
-                <div class="absolute bottom-20 right-10 w-32 h-32 rounded-full bg-gradient-to-r from-transparent to-[#f8a5c2]/10 blur-xl"></div>
-                <div class="absolute top-1/2 left-1/4 w-16 h-16 rounded-full bg-gradient-to-r from-[#f5d76e]/5 to-transparent blur-lg"></div>
+                <div class="absolute top-10 left-5 w-16 h-16 rounded-full bg-gradient-to-r from-[#f5d76e]/10 to-transparent blur-xl"></div>
+                <div class="absolute bottom-20 right-5 w-24 h-24 rounded-full bg-gradient-to-r from-transparent to-[#f8a5c2]/10 blur-xl"></div>
+                <div class="absolute top-1/2 left-1/4 w-12 h-12 rounded-full bg-gradient-to-r from-[#f5d76e]/5 to-transparent blur-lg"></div>
             </div>
             
-            <div class="z-10 relative" data-aos="fade-up" data-aos-duration="1200">
-                <p class="uppercase tracking-[0.5em] mb-6 text-xs font-semibold text-[#f5d76e]">The Wedding Celebration Of</p>
-                <h1 class="text-7xl md:text-8xl font-dancing mb-4 text-white floating">Savista <span class="heart">❤</span> Arifin</h1>
-                <p class="text-2xl font-cormorant mb-10 italic opacity-90">"Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya." <br><span class="block mt-2 text-sm">(QS. Ar-Rum: 21)</span></p>
+            <div class="z-10 relative px-4" data-aos="fade-up" data-aos-duration="1000">
+                <p class="uppercase tracking-[0.3em] mb-4 text-xs font-semibold text-[#f5d76e] mobile-text-sm">The Wedding Celebration Of</p>
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-dancing mb-4 text-white floating mobile-text-xl">Savista <span class="heart">❤</span> Arifin</h1>
+                <p class="text-lg md:text-xl font-cormorant mb-8 italic opacity-90 mobile-text-sm">"Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya." <br><span class="block mt-2 text-sm">(QS. Ar-Rum: 21)</span></p>
                 
-                <div class="flex flex-wrap gap-4 justify-center mb-16">
-                    <div class="glass-card w-24 py-5">
-                        <span id="days" class="block text-3xl font-bold text-[#f5d76e]">00</span>
+                <div class="flex flex-wrap gap-3 justify-center mb-12">
+                    <div class="glass-card w-20 py-4 mobile-full-width countdown-item">
+                        <span id="days" class="block text-2xl font-bold text-[#f5d76e]">00</span>
                         <span class="text-xs uppercase tracking-widest">Hari</span>
                     </div>
-                    <div class="glass-card w-24 py-5">
-                        <span id="hours" class="block text-3xl font-bold text-[#f5d76e]">00</span>
+                    <div class="glass-card w-20 py-4 mobile-full-width countdown-item">
+                        <span id="hours" class="block text-2xl font-bold text-[#f5d76e]">00</span>
                         <span class="text-xs uppercase tracking-widest">Jam</span>
                     </div>
-                    <div class="glass-card w-24 py-5">
-                        <span id="minutes" class="block text-3xl font-bold text-[#f5d76e]">00</span>
+                    <div class="glass-card w-20 py-4 mobile-full-width countdown-item">
+                        <span id="minutes" class="block text-2xl font-bold text-[#f5d76e]">00</span>
                         <span class="text-xs uppercase tracking-widest">Menit</span>
                     </div>
-                    <div class="glass-card w-24 py-5">
-                        <span id="seconds" class="block text-3xl font-bold text-[#f5d76e]">00</span>
+                    <div class="glass-card w-20 py-4 mobile-full-width countdown-item">
+                        <span id="seconds" class="block text-2xl font-bold text-[#f5d76e]">00</span>
                         <span class="text-xs uppercase tracking-widest">Detik</span>
                     </div>
                 </div>
                 
-                <div class="flex justify-center gap-6 mb-8">
-                    <a href="#couple" class="accent-button px-8 py-3 rounded-full text-sm">Pasangan Mempelai</a>
-                    <a href="#event" class="glass-card px-8 py-3 rounded-full text-sm border border-[#f5d76e]/30 hover:border-[#f5d76e] transition">Acara & Lokasi</a>
+                <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8 mobile-stack">
+                    <a href="#couple" class="accent-button px-6 py-3 rounded-full text-sm mobile-full-width text-center">Pasangan Mempelai</a>
+                    <a href="#event" class="glass-card px-6 py-3 rounded-full text-sm border border-[#f5d76e]/30 hover:border-[#f5d76e] transition mobile-full-width text-center">Acara & Lokasi</a>
                 </div>
             </div>
             
-            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+            <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2">
                 <a href="#couple" class="text-[#f5d76e] animate-bounce">
-                    <i class="fas fa-chevron-down text-2xl"></i>
+                    <i class="fas fa-chevron-down text-xl"></i>
                 </a>
             </div>
         </header>
 
-        <!-- Envelope Section (Baru) -->
-        <section id="envelope-section" class="py-24 px-6 bg-black/20">
+        <!-- Envelope Section -->
+        <section id="envelope-section" class="py-16 md:py-24 px-4 bg-black/20">
             <div class="max-w-6xl mx-auto">
-                <h2 class="section-title text-5xl font-dancing text-center mb-16" data-aos="fade-down">Undangan Pernikahan</h2>
+                <h2 class="section-title text-4xl md:text-5xl font-dancing text-center mb-12 md:mb-16" data-aos="fade-down">Undangan Pernikahan</h2>
                 
-                <div class="text-center mb-12 max-w-3xl mx-auto">
-                    <p class="text-xl font-cormorant mb-8 italic" data-aos="fade-up">"Assalamu'alaikum Warahmatullahi Wabarakatuh. Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta'ala, kami bermaksud menyelenggarakan pernikahan putra-putri kami"</p>
+                <div class="text-center mb-8 md:mb-12 max-w-3xl mx-auto">
+                    <p class="text-lg font-cormorant mb-6 md:mb-8 italic mobile-text-sm" data-aos="fade-up">"Assalamu'alaikum Warahmatullahi Wabarakatuh. Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta'ala, kami bermaksud menyelenggarakan pernikahan putra-putri kami"</p>
                     
                     <div class="envelope" id="envelope" onclick="toggleEnvelope()" data-aos="zoom-in">
                         <div class="envelope-front">
                             <div class="envelope-flap"></div>
                             <div class="absolute inset-0 flex flex-col items-center justify-center text-[#2c311a]">
-                                <i class="fas fa-heart text-4xl mb-4 text-[#f8a5c2]"></i>
-                                <p class="font-dancing text-3xl mb-2">Savista & Arifin</p>
-                                <p class="text-sm">Klik untuk membuka undangan</p>
+                                <i class="fas fa-heart text-3xl mb-3 text-[#f8a5c2]"></i>
+                                <p class="font-dancing text-2xl mb-1 mobile-text-lg">Savista & Arifin</p>
+                                <p class="text-xs mobile-text-sm">Ketuk untuk membuka undangan</p>
                             </div>
                         </div>
                         <div class="envelope-back">
-                            <div class="love-letter">
+                            <div class="love-letter hide-scrollbar">
                                 <div class="letter-header">
                                     <h3>Undangan Pernikahan</h3>
-                                    <p class="text-sm text-gray-600">12 Desember 2026</p>
+                                    <p class="text-xs md:text-sm text-gray-600">12 Desember 2026</p>
                                 </div>
                                 
-                                <p class="mb-3">Yang terhormat,</p>
-                                <p class="mb-4">Bapak/Ibu/Saudara/i<br>
+                                <p class="mb-2">Yang terhormat,</p>
+                                <p class="mb-3">Bapak/Ibu/Saudara/i<br>
                                 <span class="font-semibold">[Nama Tamu]</span></p>
                                 
-                                <p class="mb-4">Dengan segala kerendahan hati dan kebahagiaan, kami mengundang kehadiran Anda dalam acara pernikahan putra-putri kami:</p>
+                                <p class="mb-3">Dengan segala kerendahan hati dan kebahagiaan, kami mengundang kehadiran Anda dalam acara pernikahan putra-putri kami:</p>
                                 
-                                <p class="font-dancing text-2xl mb-2 text-[#f8a5c2]">Savista Pramesti Dewi</p>
-                                <p class="text-sm mb-4">Putri pertama dari Bapak H. Riyanto & Ibu Hj. Sari Dewi</p>
+                                <p class="font-dancing text-xl mb-1 text-[#f8a5c2]">Savista Pramesti Dewi</p>
+                                <p class="text-xs mb-3 mobile-text-sm">Putri pertama dari Bapak H. Riyanto & Ibu Hj. Sari Dewi</p>
                                 
-                                <p class="text-xl mb-4">dengan</p>
+                                <p class="text-lg mb-3">dengan</p>
                                 
-                                <p class="font-dancing text-2xl mb-2 text-[#f5d76e]">Arifin Ramadhan</p>
-                                <p class="text-sm mb-6">Putra pertama dari Bapak H. Santoso & Ibu Hj. Maya Sari</p>
+                                <p class="font-dancing text-xl mb-1 text-[#f5d76e]">Arifin Ramadhan</p>
+                                <p class="text-xs mb-4 mobile-text-sm">Putra pertama dari Bapak H. Santoso & Ibu Hj. Maya Sari</p>
                                 
                                 <div class="signature-container">
                                     <p>Hormat kami,</p>
@@ -683,30 +951,30 @@
                         </div>
                     </div>
                     
-                    <p class="text-sm opacity-70 mt-6" data-aos="fade-up">* Klik amplop untuk membuka dan membaca undangan lengkap</p>
+                    <p class="text-xs opacity-70 mt-4 mobile-text-sm" data-aos="fade-up">* Ketuk amplop untuk membuka dan membaca undangan lengkap</p>
                 </div>
             </div>
         </section>
 
         <!-- Couple Section -->
-        <section id="couple" class="py-24 px-6 max-w-6xl mx-auto">
-            <h2 class="section-title text-5xl font-dancing text-center mb-16" data-aos="fade-down">Pasangan Mempelai</h2>
+        <section id="couple" class="py-16 md:py-24 px-4 max-w-6xl mx-auto">
+            <h2 class="section-title text-4xl md:text-5xl font-dancing text-center mb-12 md:mb-16" data-aos="fade-down">Pasangan Mempelai</h2>
             
-            <div class="grid md:grid-cols-2 gap-16 items-center mb-20">
+            <div class="responsive-grid items-center mb-16">
                 <!-- Bride -->
-                <div class="text-center" data-aos="fade-right">
-                    <div class="couple-photo w-64 h-64 mx-auto mb-8 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1064" class="w-full h-full object-cover" alt="Savista">
+                <div class="text-center" data-aos="fade-up">
+                    <div class="couple-photo">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover" alt="Savista">
                     </div>
-                    <h3 class="text-4xl font-dancing mb-2 text-[#f8a5c2]">Savista Pramesti Dewi</h3>
-                    <p class="font-cormorant text-lg mb-4">Putri pertama dari</p>
+                    <h3 class="text-3xl md:text-4xl font-dancing mb-2 text-[#f8a5c2] mobile-text-lg">Savista Pramesti Dewi</h3>
+                    <p class="font-cormorant text-base mb-3 mobile-text-sm">Putri pertama dari</p>
                     <p class="font-bold mb-2">Bapak H. Riyanto & Ibu Hj. Sari Dewi</p>
-                    <div class="love-note max-w-md mx-auto mt-6">
-                        <p class="text-sm italic">"Cinta adalah ketika kebahagiaan orang lain menjadi kebahagiaanmu juga." - Voltaire</p>
+                    <div class="love-note max-w-md mx-auto mt-4 md:mt-6">
+                        <p class="text-xs md:text-sm italic mobile-text-sm">"Cinta adalah ketika kebahagiaan orang lain menjadi kebahagiaanmu juga." - Voltaire</p>
                     </div>
                     
                     <!-- Social Media Bride -->
-                    <div class="flex justify-center gap-4 mt-6">
+                    <div class="social-icons mt-4">
                         <a href="#" class="glass-card w-10 h-10 rounded-full flex items-center justify-center hover:bg-[#f8a5c2]/20">
                             <i class="fab fa-instagram text-[#f8a5c2]"></i>
                         </a>
@@ -720,19 +988,19 @@
                 </div>
                 
                 <!-- Groom -->
-                <div class="text-center" data-aos="fade-left" data-aos-delay="200">
-                    <div class="couple-photo w-64 h-64 mx-auto mb-8 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1064" class="w-full h-full object-cover" alt="Arifin">
+                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="couple-photo">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover" alt="Arifin">
                     </div>
-                    <h3 class="text-4xl font-dancing mb-2 text-[#f5d76e]">Arifin Ramadhan</h3>
-                    <p class="font-cormorant text-lg mb-4">Putra pertama dari</p>
+                    <h3 class="text-3xl md:text-4xl font-dancing mb-2 text-[#f5d76e] mobile-text-lg">Arifin Ramadhan</h3>
+                    <p class="font-cormorant text-base mb-3 mobile-text-sm">Putra pertama dari</p>
                     <p class="font-bold mb-2">Bapak H. Santoso & Ibu Hj. Maya Sari</p>
-                    <div class="love-note max-w-md mx-auto mt-6">
-                        <p class="text-sm italic">"Cinta sejati tidak buta - justru melihat lebih banyak, bukan kurang." - Ayn Rand</p>
+                    <div class="love-note max-w-md mx-auto mt-4 md:mt-6">
+                        <p class="text-xs md:text-sm italic mobile-text-sm">"Cinta sejati tidak buta - justru melihat lebih banyak, bukan kurang." - Ayn Rand</p>
                     </div>
                     
                     <!-- Social Media Groom -->
-                    <div class="flex justify-center gap-4 mt-6">
+                    <div class="social-icons mt-4">
                         <a href="#" class="glass-card w-10 h-10 rounded-full flex items-center justify-center hover:bg-[#f5d76e]/20">
                             <i class="fab fa-instagram text-[#f5d76e]"></i>
                         </a>
@@ -746,104 +1014,104 @@
                 </div>
             </div>
             
-            <!-- Wedding Party (Baru) -->
-            <div class="mt-24" data-aos="fade-up">
-                <h3 class="text-3xl font-dancing text-center mb-12 text-[#f5d76e]">Pengiring Pernikahan</h3>
+            <!-- Wedding Party -->
+            <div class="mt-16 md:mt-24" data-aos="fade-up">
+                <h3 class="text-2xl md:text-3xl font-dancing text-center mb-8 md:mb-12 text-[#f5d76e]">Pengiring Pernikahan</h3>
                 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
                     <div class="text-center">
-                        <div class="w-20 h-20 rounded-full bg-gradient-to-r from-[#f8a5c2]/20 to-transparent flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-crown text-2xl text-[#f8a5c2]"></i>
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-r from-[#f8a5c2]/20 to-transparent flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-crown text-xl md:text-2xl text-[#f8a5c2]"></i>
                         </div>
-                        <p class="font-bold">Tiara Sari</p>
-                        <p class="text-sm opacity-70">Maid of Honor</p>
+                        <p class="font-bold mobile-text-sm">Tiara Sari</p>
+                        <p class="text-xs opacity-70">Maid of Honor</p>
                     </div>
                     
                     <div class="text-center">
-                        <div class="w-20 h-20 rounded-full bg-gradient-to-r from-[#f5d76e]/20 to-transparent flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-user-tie text-2xl text-[#f5d76e]"></i>
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-r from-[#f5d76e]/20 to-transparent flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-user-tie text-xl md:text-2xl text-[#f5d76e]"></i>
                         </div>
-                        <p class="font-bold">Budi Santoso</p>
-                        <p class="text-sm opacity-70">Best Man</p>
+                        <p class="font-bold mobile-text-sm">Budi Santoso</p>
+                        <p class="text-xs opacity-70">Best Man</p>
                     </div>
                     
                     <div class="text-center">
-                        <div class="w-20 h-20 rounded-full bg-gradient-to-r from-[#f8a5c2]/20 to-transparent flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-heart text-2xl text-[#f8a5c2]"></i>
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-r from-[#f8a5c2]/20 to-transparent flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-heart text-xl md:text-2xl text-[#f8a5c2]"></i>
                         </div>
-                        <p class="font-bold">Maya Sari</p>
-                        <p class="text-sm opacity-70">Bridesmaid</p>
+                        <p class="font-bold mobile-text-sm">Maya Sari</p>
+                        <p class="text-xs opacity-70">Bridesmaid</p>
                     </div>
                     
                     <div class="text-center">
-                        <div class="w-20 h-20 rounded-full bg-gradient-to-r from-[#f5d76e]/20 to-transparent flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-ring text-2xl text-[#f5d76e]"></i>
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-r from-[#f5d76e]/20 to-transparent flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-ring text-xl md:text-2xl text-[#f5d76e]"></i>
                         </div>
-                        <p class="font-bold">Rizki Pratama</p>
-                        <p class="text-sm opacity-70">Groomsman</p>
+                        <p class="font-bold mobile-text-sm">Rizki Pratama</p>
+                        <p class="text-xs opacity-70">Groomsman</p>
                     </div>
                 </div>
             </div>
             
             <!-- Love Story -->
-            <div class="mt-24" data-aos="fade-up">
-                <h3 class="text-3xl font-dancing text-center mb-12 text-[#f5d76e]">Perjalanan Cinta Kami</h3>
+            <div class="mt-16 md:mt-24" data-aos="fade-up">
+                <h3 class="text-2xl md:text-3xl font-dancing text-center mb-8 md:mb-12 text-[#f5d76e]">Perjalanan Cinta Kami</h3>
                 
                 <div class="max-w-3xl mx-auto">
                     <div class="timeline-item" data-aos="fade-up">
-                        <h4 class="text-xl font-bold mb-2">Pertemuan Pertama <span class="text-[#f5d76e]">• 2018</span></h4>
-                        <p class="opacity-90">Kami pertama kali bertemu di acara seminar kampus. Saat itu, Savista sedang presentasi dan Arifin terpesona dengan kecerdasan dan senyumannya.</p>
+                        <h4 class="text-lg md:text-xl font-bold mb-2">Pertemuan Pertama <span class="text-[#f5d76e]">• 2018</span></h4>
+                        <p class="opacity-90 mobile-text-sm">Kami pertama kali bertemu di acara seminar kampus. Saat itu, Savista sedang presentasi dan Arifin terpesona dengan kecerdasan dan senyumannya.</p>
                     </div>
                     
                     <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
-                        <h4 class="text-xl font-bold mb-2">Titik Balik <span class="text-[#f5d76e]">• 2020</span></h4>
-                        <p class="opacity-90">Di masa pandemi, kami saling mendukung dari jauh. Video call setiap malam menjadi ritual kami, dan di situlah kami menyadari bahwa kami saling melengkapi.</p>
+                        <h4 class="text-lg md:text-xl font-bold mb-2">Titik Balik <span class="text-[#f5d76e]">• 2020</span></h4>
+                        <p class="opacity-90 mobile-text-sm">Di masa pandemi, kami saling mendukung dari jauh. Video call setiap malam menjadi ritual kami, dan di situlah kami menyadari bahwa kami saling melengkapi.</p>
                     </div>
                     
                     <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
-                        <h4 class="text-xl font-bold mb-2">Langkah Serius <span class="text-[#f5d76e]">• 2023</span></h4>
-                        <p class="opacity-90">Arifin meminta restu kepada orang tua Savista. Momen yang sangat mengharukan ketika kedua keluarga menyambut dengan hangat dan doa.</p>
+                        <h4 class="text-lg md:text-xl font-bold mb-2">Langkah Serius <span class="text-[#f5d76e]">• 2023</span></h4>
+                        <p class="opacity-90 mobile-text-sm">Arifin meminta restu kepada orang tua Savista. Momen yang sangat mengharukan ketika kedua keluarga menyambut dengan hangat dan doa.</p>
                     </div>
                     
                     <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
-                        <h4 class="text-xl font-bold mb-2">Masa Depan Bersama <span class="text-[#f5d76e]">• 2026</span></h4>
-                        <p class="opacity-90">Akhirnya, setelah perjalanan panjang, kami memutuskan untuk mengikat janji suci. Doa dan restu dari Anda semua sangat berarti bagi kami.</p>
+                        <h4 class="text-lg md:text-xl font-bold mb-2">Masa Depan Bersama <span class="text-[#f5d76e]">• 2026</span></h4>
+                        <p class="opacity-90 mobile-text-sm">Akhirnya, setelah perjalanan panjang, kami memutuskan untuk mengikat janji suci. Doa dan restu dari Anda semua sangat berarti bagi kami.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Event Details -->
-        <section id="event" class="py-24 px-6 bg-black/20">
+        <section id="event" class="py-16 md:py-24 px-4 bg-black/20">
             <div class="max-w-6xl mx-auto">
-                <h2 class="section-title text-5xl font-dancing text-center mb-16" data-aos="fade-down">Acara & Lokasi</h2>
+                <h2 class="section-title text-4xl md:text-5xl font-dancing text-center mb-12 md:mb-16" data-aos="fade-down">Acara & Lokasi</h2>
                 
-                <div class="grid md:grid-cols-2 gap-12 mb-20">
+                <div class="responsive-grid mb-16">
                     <!-- Akad Nikah -->
-                    <div class="glass-card p-10" data-aos="zoom-in">
-                        <div class="text-center mb-8">
-                            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-[#f5d76e]/20 to-transparent flex items-center justify-center mx-auto mb-6">
-                                <i class="fas fa-mosque text-3xl text-[#f5d76e]"></i>
+                    <div class="glass-card p-6 md:p-10" data-aos="zoom-in">
+                        <div class="text-center mb-6">
+                            <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-r from-[#f5d76e]/20 to-transparent flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-mosque text-2xl md:text-3xl text-[#f5d76e]"></i>
                             </div>
-                            <h3 class="text-3xl font-dancing mb-2">Akad Nikah</h3>
+                            <h3 class="text-2xl md:text-3xl font-dancing mb-2">Akad Nikah</h3>
                             <p class="text-[#f5d76e] font-bold">Sabtu, 12 Desember 2026</p>
-                            <p class="opacity-90">08.00 - 10.00 WIB</p>
+                            <p class="opacity-90 mobile-text-sm">08.00 - 10.00 WIB</p>
                         </div>
                         
                         <div class="space-y-4">
                             <div class="flex items-start gap-3">
                                 <i class="fas fa-map-marker-alt text-[#f5d76e] mt-1"></i>
                                 <div>
-                                    <p class="font-bold">Masjid Al-Ikhlas</p>
-                                    <p class="text-sm opacity-90">Jl. Kenanga No. 123, Kelurahan Menteng, Jakarta Pusat</p>
+                                    <p class="font-bold mobile-text-sm">Masjid Al-Ikhlas</p>
+                                    <p class="text-xs opacity-90 mobile-text-sm">Jl. Kenanga No. 123, Kelurahan Menteng, Jakarta Pusat</p>
                                 </div>
                             </div>
                             
                             <div class="flex items-start gap-3">
                                 <i class="fas fa-user-friends text-[#f5d76e] mt-1"></i>
                                 <div>
-                                    <p class="font-bold">Penghulu</p>
-                                    <p class="text-sm opacity-90">K.H. Ahmad Subki, M.A.</p>
+                                    <p class="font-bold mobile-text-sm">Penghulu</p>
+                                    <p class="text-xs opacity-90 mobile-text-sm">K.H. Ahmad Subki, M.A.</p>
                                 </div>
                             </div>
                             
@@ -856,30 +1124,30 @@
                     </div>
                     
                     <!-- Resepsi -->
-                    <div class="glass-card p-10" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="text-center mb-8">
-                            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-[#f8a5c2]/20 to-transparent flex items-center justify-center mx-auto mb-6">
-                                <i class="fas fa-glass-cheers text-3xl text-[#f8a5c2]"></i>
+                    <div class="glass-card p-6 md:p-10" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="text-center mb-6">
+                            <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-r from-[#f8a5c2]/20 to-transparent flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-glass-cheers text-2xl md:text-3xl text-[#f8a5c2]"></i>
                             </div>
-                            <h3 class="text-3xl font-dancing mb-2">Resepsi Pernikahan</h3>
+                            <h3 class="text-2xl md:text-3xl font-dancing mb-2">Resepsi Pernikahan</h3>
                             <p class="text-[#f5d76e] font-bold">Sabtu, 12 Desember 2026</p>
-                            <p class="opacity-90">11.00 - 14.00 WIB</p>
+                            <p class="opacity-90 mobile-text-sm">11.00 - 14.00 WIB</p>
                         </div>
                         
                         <div class="space-y-4">
                             <div class="flex items-start gap-3">
                                 <i class="fas fa-hotel text-[#f5d76e] mt-1"></i>
                                 <div>
-                                    <p class="font-bold">Grand Ballroom Hotel Majestic</p>
-                                    <p class="text-sm opacity-90">Jl. Sudirman Kav. 45, Jakarta Selatan</p>
+                                    <p class="font-bold mobile-text-sm">Grand Ballroom Hotel Majestic</p>
+                                    <p class="text-xs opacity-90 mobile-text-sm">Jl. Sudirman Kav. 45, Jakarta Selatan</p>
                                 </div>
                             </div>
                             
                             <div class="flex items-start gap-3">
                                 <i class="fas fa-utensils text-[#f5d76e] mt-1"></i>
                                 <div>
-                                    <p class="font-bold">Katering & Menu</p>
-                                    <p class="text-sm opacity-90">Prasmanan dengan berbagai pilihan masakan tradisional dan internasional</p>
+                                    <p class="font-bold mobile-text-sm">Katering & Menu</p>
+                                    <p class="text-xs opacity-90 mobile-text-sm">Prasmanan dengan berbagai pilihan masakan tradisional dan internasional</p>
                                 </div>
                             </div>
                             
@@ -893,30 +1161,30 @@
                 </div>
                 
                 <!-- Map -->
-                <div class="mt-16" data-aos="fade-up">
-                    <h3 class="text-3xl font-dancing text-center mb-8 text-[#f5d76e]">Lokasi Resepsi</h3>
-                    <div class="map-container h-96">
+                <div class="mt-12 md:mt-16" data-aos="fade-up">
+                    <h3 class="text-2xl md:text-3xl font-dancing text-center mb-6 md:mb-8 text-[#f5d76e]">Lokasi Resepsi</h3>
+                    <div class="map-container">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322283!2d106.8195613506864!3d-6.194741395493371!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5390917b759%3A0x6b45e67356080477!2sHotel%20Majestic%20Jakarta!5e0!3m2!1sid!2sid!4v1647858286883!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- RSVP Section (Baru) -->
-        <section id="rsvp" class="py-24 px-6">
+        <!-- RSVP Section -->
+        <section id="rsvp" class="py-16 md:py-24 px-4">
             <div class="max-w-4xl mx-auto">
-                <h2 class="section-title text-5xl font-dancing text-center mb-16" data-aos="fade-down">Konfirmasi Kehadiran</h2>
+                <h2 class="section-title text-4xl md:text-5xl font-dancing text-center mb-12 md:mb-16" data-aos="fade-down">Konfirmasi Kehadiran</h2>
                 
-                <div class="glass-card p-10" data-aos="zoom-in">
+                <div class="glass-card p-6 md:p-10" data-aos="zoom-in">
                     <form id="rsvpForm" onsubmit="return submitRSVP(event)">
-                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
                             <div>
-                                <label class="block mb-2 text-[#f5d76e]">Nama Lengkap *</label>
-                                <input type="text" required class="w-full p-4 rounded-xl bg-white/5 border border-white/10 outline-none text-white placeholder-white/50" placeholder="Masukkan nama lengkap">
+                                <label class="block mb-2 text-[#f5d76e] mobile-text-sm">Nama Lengkap *</label>
+                                <input type="text" required class="w-full p-3 md:p-4 rounded-xl bg-white/5 border border-white/10 outline-none text-white placeholder-white/50 mobile-text-sm" placeholder="Masukkan nama lengkap">
                             </div>
                             <div>
-                                <label class="block mb-2 text-[#f5d76e]">Jumlah Tamu *</label>
-                                <select required class="w-full p-4 rounded-xl bg-white/5 border border-white/10 outline-none text-white">
+                                <label class="block mb-2 text-[#f5d76e] mobile-text-sm">Jumlah Tamu *</label>
+                                <select required class="w-full p-3 md:p-4 rounded-xl bg-white/5 border border-white/10 outline-none text-white mobile-text-sm">
                                     <option value="">Pilih jumlah tamu</option>
                                     <option value="1">1 Orang</option>
                                     <option value="2">2 Orang</option>
@@ -926,31 +1194,31 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block mb-2 text-[#f5d76e]">Nomor Telepon</label>
-                                <input type="tel" class="w-full p-4 rounded-xl bg-white/5 border border-white/10 outline-none text-white placeholder-white/50" placeholder="08XXXXXXXXXX">
+                                <label class="block mb-2 text-[#f5d76e] mobile-text-sm">Nomor Telepon</label>
+                                <input type="tel" class="w-full p-3 md:p-4 rounded-xl bg-white/5 border border-white/10 outline-none text-white placeholder-white/50 mobile-text-sm" placeholder="08XXXXXXXXXX">
                             </div>
                             <div>
-                                <label class="block mb-2 text-[#f5d76e]">Email</label>
-                                <input type="email" class="w-full p-4 rounded-xl bg-white/5 border border-white/10 outline-none text-white placeholder-white/50" placeholder="email@example.com">
+                                <label class="block mb-2 text-[#f5d76e] mobile-text-sm">Email</label>
+                                <input type="email" class="w-full p-3 md:p-4 rounded-xl bg-white/5 border border-white/10 outline-none text-white placeholder-white/50 mobile-text-sm" placeholder="email@example.com">
                             </div>
                         </div>
                         
-                        <div class="mb-8">
-                            <label class="block mb-4 text-[#f5d76e]">Konfirmasi Kehadiran *</label>
-                            <div class="grid grid-cols-3 gap-4">
-                                <div class="rsvp-option glass-card p-4 text-center border border-green-500/30" onclick="selectRSVP('yes')">
-                                    <i class="fas fa-check-circle text-2xl text-green-400 mb-2"></i>
-                                    <p class="font-bold">Hadir</p>
+                        <div class="mb-6 md:mb-8">
+                            <label class="block mb-3 md:mb-4 text-[#f5d76e]">Konfirmasi Kehadiran *</label>
+                            <div class="rsvp-grid">
+                                <div class="rsvp-option glass-card p-3 md:p-4 text-center border border-green-500/30" onclick="selectRSVP('yes')">
+                                    <i class="fas fa-check-circle text-xl md:text-2xl text-green-400 mb-1 md:mb-2"></i>
+                                    <p class="font-bold mobile-text-sm">Hadir</p>
                                     <p class="text-xs opacity-70">Saya akan hadir</p>
                                 </div>
-                                <div class="rsvp-option glass-card p-4 text-center border border-yellow-500/30" onclick="selectRSVP('maybe')">
-                                    <i class="fas fa-question-circle text-2xl text-yellow-400 mb-2"></i>
-                                    <p class="font-bold">Mungkin</p>
+                                <div class="rsvp-option glass-card p-3 md:p-4 text-center border border-yellow-500/30" onclick="selectRSVP('maybe')">
+                                    <i class="fas fa-question-circle text-xl md:text-2xl text-yellow-400 mb-1 md:mb-2"></i>
+                                    <p class="font-bold mobile-text-sm">Mungkin</p>
                                     <p class="text-xs opacity-70">Masih belum pasti</p>
                                 </div>
-                                <div class="rsvp-option glass-card p-4 text-center border border-red-500/30" onclick="selectRSVP('no')">
-                                    <i class="fas fa-times-circle text-2xl text-red-400 mb-2"></i>
-                                    <p class="font-bold">Tidak Hadir</p>
+                                <div class="rsvp-option glass-card p-3 md:p-4 text-center border border-red-500/30" onclick="selectRSVP('no')">
+                                    <i class="fas fa-times-circle text-xl md:text-2xl text-red-400 mb-1 md:mb-2"></i>
+                                    <p class="font-bold mobile-text-sm">Tidak Hadir</p>
                                     <p class="text-xs opacity-70">Tidak dapat hadir</p>
                                 </div>
                             </div>
@@ -958,46 +1226,46 @@
                         </div>
                         
                         <div class="mb-6">
-                            <label class="block mb-2 text-[#f5d76e]">Pesan untuk Mempelai</label>
-                            <textarea class="w-full p-4 rounded-xl bg-white/5 border border-white/10 outline-none text-white placeholder-white/50 h-32" placeholder="Tulis pesan dan doa untuk kami..."></textarea>
+                            <label class="block mb-2 text-[#f5d76e] mobile-text-sm">Pesan untuk Mempelai</label>
+                            <textarea class="w-full p-3 md:p-4 rounded-xl bg-white/5 border border-white/10 outline-none text-white placeholder-white/50 h-32 mobile-text-sm" placeholder="Tulis pesan dan doa untuk kami..."></textarea>
                         </div>
                         
-                        <button type="submit" class="accent-button w-full py-4 rounded-xl text-lg font-bold">
+                        <button type="submit" class="accent-button w-full py-3 md:py-4 rounded-xl text-base md:text-lg font-bold">
                             <i class="fas fa-paper-plane mr-2"></i> Kirim Konfirmasi
                         </button>
                     </form>
                 </div>
                 
-                <div class="text-center mt-12">
-                    <p class="text-sm opacity-70">Konfirmasi kehadiran dapat dikirimkan melalui WhatsApp: <span class="text-[#f5d76e]">+62 812-3456-7890</span></p>
+                <div class="text-center mt-8 md:mt-12">
+                    <p class="text-xs md:text-sm opacity-70 mobile-text-sm">Konfirmasi kehadiran dapat dikirimkan melalui WhatsApp: <span class="text-[#f5d76e]">+62 812-3456-7890</span></p>
                 </div>
             </div>
         </section>
 
-        <!-- Gift Registry Section (Baru) -->
-        <section id="gifts" class="py-24 px-6 bg-black/20">
+        <!-- Gift Registry Section -->
+        <section id="gifts" class="py-16 md:py-24 px-4 bg-black/20">
             <div class="max-w-6xl mx-auto">
-                <h2 class="section-title text-5xl font-dancing text-center mb-16" data-aos="fade-down">Amplop Digital</h2>
+                <h2 class="section-title text-4xl md:text-5xl font-dancing text-center mb-12 md:mb-16" data-aos="fade-down">Amplop Digital</h2>
                 
-                <div class="text-center mb-12 max-w-2xl mx-auto">
-                    <p class="text-lg font-cormorant mb-8" data-aos="fade-up">"Kehadiran dan doa Anda sudah lebih dari cukup untuk kami. Namun jika ingin memberikan kado, berikut beberapa saran yang bisa menjadi inspirasi."</p>
+                <div class="text-center mb-8 md:mb-12 max-w-2xl mx-auto">
+                    <p class="text-base md:text-lg font-cormorant mb-6 md:mb-8 mobile-text-sm" data-aos="fade-up">"Kehadiran dan doa Anda sudah lebih dari cukup untuk kami. Namun jika ingin memberikan kado, berikut beberapa saran yang bisa menjadi inspirasi."</p>
                 </div>
                 
-                <div class="grid md:grid-cols-3 gap-8 mb-12">
-                    <div class="gift-item glass-card p-8 text-center" data-aos="fade-up">
-                        <div class="w-20 h-20 rounded-full bg-gradient-to-r from-[#f5d76e]/20 to-transparent flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-piggy-bank text-3xl text-[#f5d76e]"></i>
+                <div class="gift-items-grid mb-8 md:mb-12">
+                    <div class="gift-item glass-card p-6 md:p-8 text-center" data-aos="fade-up">
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-r from-[#f5d76e]/20 to-transparent flex items-center justify-center mx-auto mb-4 md:mb-6">
+                            <i class="fas fa-piggy-bank text-2xl md:text-3xl text-[#f5d76e]"></i>
                         </div>
-                        <h3 class="text-2xl font-dancing mb-4">Amplop Digital</h3>
-                        <p class="mb-6 opacity-90">Kami menerima amplop digital melalui transfer bank untuk membantu perjalanan bulan madu kami.</p>
-                        <div class="space-y-3 mb-6">
-                            <div class="text-left p-3 bg-black/20 rounded-lg">
-                                <p class="text-sm opacity-70">Bank Central Asia</p>
-                                <p class="font-bold">1234 5678 9012 (Savista P. Dewi)</p>
+                        <h3 class="text-xl md:text-2xl font-dancing mb-3 md:mb-4">Amplop Digital</h3>
+                        <p class="mb-4 md:mb-6 opacity-90 mobile-text-sm">Kami menerima amplop digital melalui transfer bank untuk membantu perjalanan bulan madu kami.</p>
+                        <div class="space-y-2 md:space-y-3 mb-4 md:mb-6">
+                            <div class="text-left p-2 md:p-3 bg-black/20 rounded-lg">
+                                <p class="text-xs md:text-sm opacity-70">Bank Central Asia</p>
+                                <p class="font-bold mobile-text-sm">1234 5678 9012 (Savista P. Dewi)</p>
                             </div>
-                            <div class="text-left p-3 bg-black/20 rounded-lg">
-                                <p class="text-sm opacity-70">Bank Mandiri</p>
-                                <p class="font-bold">9876 5432 1098 (Arifin Ramadhan)</p>
+                            <div class="text-left p-2 md:p-3 bg-black/20 rounded-lg">
+                                <p class="text-xs md:text-sm opacity-70">Bank Mandiri</p>
+                                <p class="font-bold mobile-text-sm">9876 5432 1098 (Arifin Ramadhan)</p>
                             </div>
                         </div>
                         <button onclick="copyBankDetails()" class="accent-button w-full py-3 rounded-lg">
@@ -1005,86 +1273,86 @@
                         </button>
                     </div>
                     
-                    <div class="gift-item glass-card p-8 text-center" data-aos="fade-up" data-aos-delay="100">
-                        <div class="w-20 h-20 rounded-full bg-gradient-to-r from-[#f8a5c2]/20 to-transparent flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-gift text-3xl text-[#f8a5c2]"></i>
+                    <div class="gift-item glass-card p-6 md:p-8 text-center" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-r from-[#f8a5c2]/20 to-transparent flex items-center justify-center mx-auto mb-4 md:mb-6">
+                            <i class="fas fa-gift text-2xl md:text-3xl text-[#f8a5c2]"></i>
                         </div>
-                        <h3 class="text-2xl font-dancing mb-4">Registri Kado</h3>
-                        <p class="mb-6 opacity-90">Berikut beberapa kebutuhan rumah tangga yang dapat menjadi pilihan kado untuk kami:</p>
-                        <div class="space-y-3 text-left">
-                            <div class="flex items-center gap-3">
+                        <h3 class="text-xl md:text-2xl font-dancing mb-3 md:mb-4">Registri Kado</h3>
+                        <p class="mb-4 md:mb-6 opacity-90 mobile-text-sm">Berikut beberapa kebutuhan rumah tangga yang dapat menjadi pilihan kado untuk kami:</p>
+                        <div class="space-y-2 text-left">
+                            <div class="flex items-center gap-2 md:gap-3">
                                 <i class="fas fa-check text-[#f5d76e]"></i>
-                                <span>Set peralatan masak</span>
+                                <span class="mobile-text-sm">Set peralatan masak</span>
                             </div>
-                            <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-2 md:gap-3">
                                 <i class="fas fa-check text-[#f5d76e]"></i>
-                                <span>Set sprei dan bed cover</span>
+                                <span class="mobile-text-sm">Set sprei dan bed cover</span>
                             </div>
-                            <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-2 md:gap-3">
                                 <i class="fas fa-check text-[#f5d76e]"></i>
-                                <span>Perlengkapan dapur</span>
+                                <span class="mobile-text-sm">Perlengkapan dapur</span>
                             </div>
-                            <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-2 md:gap-3">
                                 <i class="fas fa-check text-[#f5d76e]"></i>
-                                <span>Voucher perabotan rumah</span>
+                                <span class="mobile-text-sm">Voucher perabotan rumah</span>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="gift-item glass-card p-8 text-center" data-aos="fade-up" data-aos-delay="200">
-                        <div class="w-20 h-20 rounded-full bg-gradient-to-r from-[#f5d76e]/20 to-transparent flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-hands-helping text-3xl text-[#f5d76e]"></i>
+                    <div class="gift-item glass-card p-6 md:p-8 text-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-r from-[#f5d76e]/20 to-transparent flex items-center justify-center mx-auto mb-4 md:mb-6">
+                            <i class="fas fa-hands-helping text-2xl md:text-3xl text-[#f5d76e]"></i>
                         </div>
-                        <h3 class="text-2xl font-dancing mb-4">Donasi Amal</h3>
-                        <p class="mb-6 opacity-90">Sebagai alternatif, Anda dapat berdonasi atas nama kami untuk kegiatan sosial dan amal berikut:</p>
-                        <div class="space-y-3 text-left">
-                            <div class="flex items-center gap-3">
+                        <h3 class="text-xl md:text-2xl font-dancing mb-3 md:mb-4">Donasi Amal</h3>
+                        <p class="mb-4 md:mb-6 opacity-90 mobile-text-sm">Sebagai alternatif, Anda dapat berdonasi atas nama kami untuk kegiatan sosial dan amal berikut:</p>
+                        <div class="space-y-2 text-left">
+                            <div class="flex items-center gap-2 md:gap-3">
                                 <i class="fas fa-heart text-[#f8a5c2]"></i>
-                                <span>Panti Asuhan Al-Ikhlas</span>
+                                <span class="mobile-text-sm">Panti Asuhan Al-Ikhlas</span>
                             </div>
-                            <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-2 md:gap-3">
                                 <i class="fas fa-heart text-[#f8a5c2]"></i>
-                                <span>Yayasan Pendidikan Anak Yatim</span>
+                                <span class="mobile-text-sm">Yayasan Pendidikan Anak Yatim</span>
                             </div>
-                            <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-2 md:gap-3">
                                 <i class="fas fa-heart text-[#f8a5c2]"></i>
-                                <span>Program Beasiswa Mahasiswa</span>
+                                <span class="mobile-text-sm">Program Beasiswa Mahasiswa</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="text-center mt-8">
-                    <p class="text-sm opacity-70">Kehadiran dan doa Anda sudah menjadi hadiah terindah bagi kami ❤️</p>
+                <div class="text-center mt-6 md:mt-8">
+                    <p class="text-xs md:text-sm opacity-70 mobile-text-sm">Kehadiran dan doa Anda sudah menjadi hadiah terindah bagi kami ❤️</p>
                 </div>
             </div>
         </section>
 
         <!-- Photo Gallery -->
-        <section class="py-24 px-6">
+        <section class="py-16 md:py-24 px-4">
             <div class="max-w-6xl mx-auto">
-                <h2 class="section-title text-5xl font-dancing text-center mb-16" data-aos="fade-down">Galeri Kenangan</h2>
+                <h2 class="section-title text-4xl md:text-5xl font-dancing text-center mb-12 md:mb-16" data-aos="fade-down">Galeri Kenangan</h2>
                 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-                    <div class="gallery-item col-span-2 row-span-2" data-aos="zoom-in">
-                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1069" class="rounded-3xl h-full w-full object-cover" alt="Pre-wedding">
+                <div class="gallery-grid mb-8 md:mb-12">
+                    <div class="gallery-item col-span-2" data-aos="zoom-in">
+                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=800" class="rounded-2xl md:rounded-3xl h-48 md:h-full w-full object-cover" alt="Pre-wedding">
                     </div>
                     <div class="gallery-item" data-aos="fade-left">
-                        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80&w=1064" class="rounded-2xl h-48 w-full object-cover" alt="Moment 1">
+                        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80&w=800" class="rounded-xl md:rounded-2xl h-40 md:h-48 w-full object-cover" alt="Moment 1">
                     </div>
                     <div class="gallery-item" data-aos="fade-left" data-aos-delay="100">
-                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80&w=1064" class="rounded-2xl h-48 w-full object-cover" alt="Moment 2">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80&w=800" class="rounded-xl md:rounded-2xl h-40 md:h-48 w-full object-cover" alt="Moment 2">
                     </div>
                     <div class="gallery-item" data-aos="fade-left" data-aos-delay="200">
-                        <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&q=80&w=1471" class="rounded-2xl h-48 w-full object-cover" alt="Moment 3">
+                        <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&q=80&w=800" class="rounded-xl md:rounded-2xl h-40 md:h-48 w-full object-cover" alt="Moment 3">
                     </div>
                     <div class="gallery-item" data-aos="fade-left" data-aos-delay="300">
-                        <img src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&q=80&w=1470" class="rounded-2xl h-48 w-full object-cover" alt="Moment 4">
+                        <img src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&q=80&w=800" class="rounded-xl md:rounded-2xl h-40 md:h-48 w-full object-cover" alt="Moment 4">
                     </div>
                 </div>
                 
                 <div class="text-center">
-                    <button onclick="viewMorePhotos()" class="glass-card px-10 py-3 rounded-full border border-[#f5d76e]/30 hover:border-[#f5d76e] transition">
+                    <button onclick="viewMorePhotos()" class="glass-card px-8 md:px-10 py-3 rounded-full border border-[#f5d76e]/30 hover:border-[#f5d76e] transition mobile-text-sm">
                         Lihat Lebih Banyak Foto <i class="fas fa-arrow-right ml-2"></i>
                     </button>
                 </div>
@@ -1092,99 +1360,99 @@
         </section>
 
         <!-- Wishes Section -->
-        <section class="py-24 px-6 pb-40">
+        <section class="py-16 md:py-24 px-4 pb-32 md:pb-40">
             <div class="max-w-4xl mx-auto">
-                <h2 class="section-title text-5xl font-dancing text-center mb-16" data-aos="fade-down">Ucapan & Doa</h2>
+                <h2 class="section-title text-4xl md:text-5xl font-dancing text-center mb-12 md:mb-16" data-aos="fade-down">Ucapan & Doa</h2>
                 
-                <div class="glass-card p-8 mb-10" data-aos="fade-up">
-                    <div class="grid md:grid-cols-2 gap-6 mb-6">
-                        <input id="userName" type="text" placeholder="Nama Anda" class="w-full p-4 rounded-xl bg-white/5 border border-white/10 outline-none text-white placeholder-white/50">
-                        <input id="userRelation" type="text" placeholder="Hubungan dengan mempelai (opsional)" class="w-full p-4 rounded-xl bg-white/5 border border-white/10 outline-none text-white placeholder-white/50">
+                <div class="glass-card p-6 md:p-8 mb-8" data-aos="fade-up">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-4 md:mb-6">
+                        <input id="userName" type="text" placeholder="Nama Anda" class="w-full p-3 md:p-4 rounded-xl bg-white/5 border border-white/10 outline-none text-white placeholder-white/50 mobile-text-sm">
+                        <input id="userRelation" type="text" placeholder="Hubungan dengan mempelai (opsional)" class="w-full p-3 md:p-4 rounded-xl bg-white/5 border border-white/10 outline-none text-white placeholder-white/50 mobile-text-sm">
                     </div>
-                    <textarea id="userWish" placeholder="Tulis doa dan harapan terbaik Anda untuk kami..." class="w-full p-4 mb-6 rounded-xl bg-white/5 border border-white/10 h-40 outline-none text-white placeholder-white/50"></textarea>
-                    <button onclick="addWish()" class="w-full py-4 rounded-xl border border-[#f5d76e] text-[#f5d76e] hover:bg-[#f5d76e] hover:text-black transition-all font-bold text-lg">
+                    <textarea id="userWish" placeholder="Tulis doa dan harapan terbaik Anda untuk kami..." class="w-full p-3 md:p-4 mb-4 md:mb-6 rounded-xl bg-white/5 border border-white/10 h-32 outline-none text-white placeholder-white/50 mobile-text-sm"></textarea>
+                    <button onclick="addWish()" class="w-full py-3 md:py-4 rounded-xl border border-[#f5d76e] text-[#f5d76e] hover:bg-[#f5d76e] hover:text-black transition-all font-bold text-base md:text-lg">
                         <i class="fas fa-feather-alt mr-2"></i> Kirim Doa & Ucapan
                     </button>
                 </div>
 
-                <div id="wishContainer" class="space-y-6 max-h-[600px] overflow-y-auto custom-scrollbar pr-4">
+                <div id="wishContainer" class="space-y-4 md:space-y-6 max-h-[500px] overflow-y-auto custom-scrollbar pr-2 md:pr-4">
                     <!-- Sample Wishes -->
-                    <div class="glass-card p-6 border-l-4 border-[#f5d76e]" data-aos="fade-left">
-                        <div class="flex justify-between items-start mb-3">
+                    <div class="glass-card p-4 md:p-6 border-l-4 border-[#f5d76e]" data-aos="fade-left">
+                        <div class="flex justify-between items-start mb-2 md:mb-3">
                             <div>
-                                <p class="font-bold text-[#f5d76e]">Tiara Sari</p>
+                                <p class="font-bold text-[#f5d76e] mobile-text-sm">Tiara Sari</p>
                                 <p class="text-xs opacity-70">Sahabat Savista</p>
                             </div>
                             <p class="text-xs opacity-70">2 hari yang lalu</p>
                         </div>
-                        <p class="text-sm opacity-90 italic leading-relaxed">"Congrats untuk kalian berdua! Semoga pernikahan ini menjadi awal dari kehidupan yang penuh berkah, kebahagiaan, dan cinta yang tak pernah pudar. Lancar selalu acaranya!"</p>
+                        <p class="text-xs md:text-sm opacity-90 italic leading-relaxed mobile-text-sm">"Congrats untuk kalian berdua! Semoga pernikahan ini menjadi awal dari kehidupan yang penuh berkah, kebahagiaan, dan cinta yang tak pernah pudar. Lancar selalu acaranya!"</p>
                     </div>
                     
-                    <div class="glass-card p-6 border-l-4 border-[#f8a5c2]" data-aos="fade-left" data-aos-delay="100">
-                        <div class="flex justify-between items-start mb-3">
+                    <div class="glass-card p-4 md:p-6 border-l-4 border-[#f8a5c2]" data-aos="fade-left" data-aos-delay="100">
+                        <div class="flex justify-between items-start mb-2 md:mb-3">
                             <div>
-                                <p class="font-bold text-[#f5d76e]">Budi Santoso</p>
+                                <p class="font-bold text-[#f5d76e] mobile-text-sm">Budi Santoso</p>
                                 <p class="text-xs opacity-70">Rekan kerja Arifin</p>
                             </div>
                             <p class="text-xs opacity-70">5 hari yang lalu</p>
                         </div>
-                        <p class="text-sm opacity-90 italic leading-relaxed">"Selamat menempuh hidup baru! Semoga kalian selalu diberikan kesabaran, pengertian, dan kasih sayang dalam mengarungi bahtera rumah tangga. Sukses selalu!"</p>
+                        <p class="text-xs md:text-sm opacity-90 italic leading-relaxed mobile-text-sm">"Selamat menempuh hidup baru! Semoga kalian selalu diberikan kesabaran, pengertian, dan kasih sayang dalam mengarungi bahtera rumah tangga. Sukses selalu!"</p>
                     </div>
                     
-                    <div class="glass-card p-6 border-l-4 border-[#f5d76e]" data-aos="fade-left" data-aos-delay="200">
-                        <div class="flex justify-between items-start mb-3">
+                    <div class="glass-card p-4 md:p-6 border-l-4 border-[#f5d76e]" data-aos="fade-left" data-aos-delay="200">
+                        <div class="flex justify-between items-start mb-2 md:mb-3">
                             <div>
-                                <p class="font-bold text-[#f5d76e]">Maya & Rizki</p>
+                                <p class="font-bold text-[#f5d76e] mobile-text-sm">Maya & Rizki</p>
                                 <p class="text-xs opacity-70">Sepupu Savista</p>
                             </div>
                             <p class="text-xs opacity-70">1 minggu yang lalu</p>
                         </div>
-                        <p class="text-sm opacity-90 italic leading-relaxed">"Kami turut bahagia mendengar kabar pernikahan kalian. Semoga Allah SWT senantiasa melimpahkan rahmat-Nya kepada keluarga kecil kalian. Barakallah!"</p>
+                        <p class="text-xs md:text-sm opacity-90 italic leading-relaxed mobile-text-sm">"Kami turut bahagia mendengar kabar pernikahan kalian. Semoga Allah SWT senantiasa melimpahkan rahmat-Nya kepada keluarga kecil kalian. Barakallah!"</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Footer -->
-        <footer class="py-16 px-6 bg-black/40 text-center relative">
+        <footer class="py-12 md:py-16 px-4 bg-black/40 text-center relative">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-5xl font-dancing mb-8" data-aos="fade-down">Savista <span class="heart">❤</span> Arifin</h2>
-                <p class="text-lg font-cormorant mb-10 max-w-2xl mx-auto" data-aos="fade-up">"Cinta sejati bukan tentang menemukan seseorang yang sempurna, tetapi tentang melihat seseorang yang tidak sempurna dengan cara yang sempurna."</p>
+                <h2 class="text-4xl md:text-5xl font-dancing mb-6 md:mb-8" data-aos="fade-down">Savista <span class="heart">❤</span> Arifin</h2>
+                <p class="text-base md:text-lg font-cormorant mb-8 md:mb-10 max-w-2xl mx-auto mobile-text-sm" data-aos="fade-up">"Cinta sejati bukan tentang menemukan seseorang yang sempurna, tetapi tentang melihat seseorang yang tidak sempurna dengan cara yang sempurna."</p>
                 
-                <div class="flex flex-wrap justify-center gap-8 mb-10" data-aos="fade-up">
-                    <a href="https://wa.me/6281234567890?text=Halo%20Savista%20%26%20Arifin,%20saya%20mengucapkan%20selamat%20atas%20pernikahan%20kalian!" target="_blank" class="glass-card w-14 h-14 rounded-full flex items-center justify-center hover:bg-[#25D366]/20 hover:border-[#25D366] transition">
-                        <i class="fab fa-whatsapp text-2xl"></i>
+                <div class="social-icons mb-8 md:mb-10" data-aos="fade-up">
+                    <a href="https://wa.me/6281234567890?text=Halo%20Savista%20%26%20Arifin,%20saya%20mengucapkan%20selamat%20atas%20pernikahan%20kalian!" target="_blank" class="glass-card w-12 h-12 rounded-full flex items-center justify-center hover:bg-[#25D366]/20 hover:border-[#25D366] transition">
+                        <i class="fab fa-whatsapp text-xl md:text-2xl"></i>
                     </a>
-                    <a href="https://instagram.com/savista_arifin" target="_blank" class="glass-card w-14 h-14 rounded-full flex items-center justify-center hover:bg-gradient-to-r from-[#833AB4]/20 to-[#FD1D1D]/20 hover:border-[#E1306C] transition">
-                        <i class="fab fa-instagram text-2xl"></i>
+                    <a href="https://instagram.com/savista_arifin" target="_blank" class="glass-card w-12 h-12 rounded-full flex items-center justify-center hover:bg-gradient-to-r from-[#833AB4]/20 to-[#FD1D1D]/20 hover:border-[#E1306C] transition">
+                        <i class="fab fa-instagram text-xl md:text-2xl"></i>
                     </a>
-                    <a href="mailto:savista.arifin@gmail.com" class="glass-card w-14 h-14 rounded-full flex items-center justify-center hover:bg-[#EA4335]/20 hover:border-[#EA4335] transition">
-                        <i class="fas fa-envelope text-2xl"></i>
+                    <a href="mailto:savista.arifin@gmail.com" class="glass-card w-12 h-12 rounded-full flex items-center justify-center hover:bg-[#EA4335]/20 hover:border-[#EA4335] transition">
+                        <i class="fas fa-envelope text-xl md:text-2xl"></i>
                     </a>
                 </div>
                 
-                <div class="floral-divider mb-10">
+                <div class="floral-divider mb-8 md:mb-10">
                     <div></div>
                 </div>
                 
-                <p class="text-sm opacity-70" data-aos="fade-up">Dengan segala kerendahan hati, kami mengucapkan terima kasih atas doa dan restu dari Bapak/Ibu/Saudara/i sekalian.</p>
-                <p class="text-xs mt-6 opacity-50">© 2026 Pernikahan Savista & Arifin. Made with <i class="fas fa-heart text-[#f8a5c2]"></i></p>
+                <p class="text-xs md:text-sm opacity-70 mobile-text-sm" data-aos="fade-up">Dengan segala kerendahan hati, kami mengucapkan terima kasih atas doa dan restu dari Bapak/Ibu/Saudara/i sekalian.</p>
+                <p class="text-xs mt-4 md:mt-6 opacity-50 mobile-text-sm">© 2026 Pernikahan Savista & Arifin. Made with <i class="fas fa-heart text-[#f8a5c2]"></i></p>
             </div>
             
             <!-- Music Player -->
-            <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
+            <div class="fixed-bottom-right">
                 <div id="music-btn" class="vinyl-record shadow-2xl">
                     <audio id="wedding-audio" loop>
                         <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
                     </audio>
                 </div>
-                <div class="glass-card px-4 py-2 text-xs opacity-80 hidden" id="music-info">
-                    <p>Wedding Song: Can't Help Falling In Love</p>
+                <div class="glass-card px-3 py-1 text-xs opacity-80 hidden" id="music-info">
+                    <p class="mobile-text-sm">Wedding Song</p>
                 </div>
             </div>
             
             <!-- Back to Top -->
-            <a href="#" class="fixed bottom-6 left-6 z-50 glass-card w-12 h-12 rounded-full flex items-center justify-center">
+            <a href="#" class="fixed-bottom-left glass-card w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center">
                 <i class="fas fa-chevron-up"></i>
             </a>
         </footer>
@@ -1192,11 +1460,18 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Initialize AOS
+        // Initialize AOS with mobile optimization
         AOS.init({ 
-            duration: 1000, 
-            once: false,
-            offset: 100
+            duration: 800, 
+            once: true,
+            offset: 50,
+            delay: 100,
+            disable: window.innerWidth < 640
+        });
+        
+        // Re-enable AOS on resize
+        window.addEventListener('resize', function() {
+            AOS.refresh();
         });
 
         // Open Invitation with Confetti
@@ -1204,15 +1479,22 @@
             const overlay = document.getElementById('cover-overlay');
             const mainContent = document.getElementById('main-content');
             
+            // Vibrate on mobile if supported
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+            
             // Play sound
             const audio = document.getElementById('wedding-audio');
-            audio.volume = 0.5;
-            audio.play();
+            audio.volume = 0.3;
+            audio.play().catch(e => {
+                console.log("Audio autoplay prevented:", e);
+            });
             
             // Start confetti
             confetti({
-                particleCount: 150,
-                spread: 70,
+                particleCount: 100,
+                spread: 60,
                 origin: { y: 0.6 },
                 colors: ['#f5d76e', '#f8a5c2', '#ffffff']
             });
@@ -1224,45 +1506,72 @@
                 mainContent.style.opacity = '1';
                 document.body.classList.remove('overflow-hidden');
                 
+                // Enable scroll after animation
+                document.body.style.overflow = 'auto';
+                
                 // More confetti
                 setTimeout(() => {
                     confetti({
-                        particleCount: 100,
+                        particleCount: 80,
                         angle: 60,
-                        spread: 55,
+                        spread: 50,
                         origin: { x: 0 },
                         colors: ['#f5d76e', '#f8a5c2', '#ffffff']
                     });
                     confetti({
-                        particleCount: 100,
+                        particleCount: 80,
                         angle: 120,
-                        spread: 55,
+                        spread: 50,
                         origin: { x: 1 },
                         colors: ['#f5d76e', '#f8a5c2', '#ffffff']
                     });
-                }, 500);
-            }, 1200);
+                }, 300);
+            }, 1000);
         }
 
-        // Music Control
+        // Music Control with touch optimization
         const audio = document.getElementById('wedding-audio');
         const btn = document.getElementById('music-btn');
         const musicInfo = document.getElementById('music-info');
         
-        btn.onclick = () => {
+        let isMusicPlaying = false;
+        
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
             if (audio.paused) { 
-                audio.play(); 
-                btn.classList.remove('paused');
-                musicInfo.classList.remove('hidden');
-                setTimeout(() => {
-                    musicInfo.classList.add('hidden');
-                }, 3000);
+                audio.play().then(() => {
+                    btn.classList.remove('paused');
+                    musicInfo.classList.remove('hidden');
+                    isMusicPlaying = true;
+                    
+                    // Hide music info after 3 seconds
+                    setTimeout(() => {
+                        if (isMusicPlaying) {
+                            musicInfo.classList.add('hidden');
+                        }
+                    }, 3000);
+                }).catch(err => {
+                    console.log("Audio play failed:", err);
+                    // Show play button state anyway
+                    btn.classList.remove('paused');
+                });
             } else { 
                 audio.pause(); 
                 btn.classList.add('paused'); 
                 musicInfo.classList.add('hidden');
+                isMusicPlaying = false;
             }
-        };
+        });
+        
+        // Also respond to touch events
+        btn.addEventListener('touchstart', function(e) {
+            this.style.transform = 'scale(0.95)';
+        });
+        
+        btn.addEventListener('touchend', function(e) {
+            this.style.transform = 'scale(1)';
+        });
 
         // Countdown Timer
         const target = new Date("Dec 12, 2026 09:00:00").getTime();
@@ -1299,16 +1608,16 @@
             
             const container = document.getElementById('wishContainer');
             const newWish = document.createElement('div');
-            newWish.className = "glass-card p-6 border-l-4 border-[#f5d76e] animate-pulse";
+            newWish.className = "glass-card p-4 md:p-6 border-l-4 border-[#f5d76e] animate-pulse";
             newWish.innerHTML = `
-                <div class="flex justify-between items-start mb-3">
+                <div class="flex justify-between items-start mb-2 md:mb-3">
                     <div>
-                        <p class="font-bold text-[#f5d76e]">${name}</p>
+                        <p class="font-bold text-[#f5d76e] mobile-text-sm">${name}</p>
                         ${relation ? `<p class="text-xs opacity-70">${relation}</p>` : ''}
                     </div>
                     <p class="text-xs opacity-70">Baru saja</p>
                 </div>
-                <p class="text-sm opacity-90 italic leading-relaxed">"${wish}"</p>
+                <p class="text-xs md:text-sm opacity-90 italic leading-relaxed mobile-text-sm">"${wish}"</p>
             `;
             
             container.prepend(newWish);
@@ -1318,9 +1627,6 @@
             document.getElementById('userRelation').value = "";
             document.getElementById('userWish').value = "";
             
-            // Scroll to new wish
-            newWish.scrollIntoView({ behavior: 'smooth' });
-            
             // Remove animation class after animation completes
             setTimeout(() => {
                 newWish.classList.remove('animate-pulse');
@@ -1328,14 +1634,52 @@
             
             // Show thank you message
             alert("Terima kasih atas doa dan ucapannya! Kami sangat menghargainya.");
+            
+            // Vibrate on mobile if supported
+            if (navigator.vibrate) {
+                navigator.vibrate([50]);
+            }
         }
 
         // Copy Text Function
         function copyBankDetails() {
             const bankDetails = "Bank Central Asia: 1234 5678 9012 (Savista P. Dewi)\nBank Mandiri: 9876 5432 1098 (Arifin Ramadhan)";
-            navigator.clipboard.writeText(bankDetails);
             
-            // Show notification
+            // Try to use Clipboard API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(bankDetails).then(() => {
+                    showCopySuccess();
+                }).catch(err => {
+                    // Fallback for older browsers
+                    copyFallback(bankDetails);
+                });
+            } else {
+                // Fallback for older browsers
+                copyFallback(bankDetails);
+            }
+        }
+        
+        function copyFallback(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showCopySuccess();
+            } catch (err) {
+                alert("Gagal menyalin teks: " + err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+        
+        function showCopySuccess() {
             const originalText = event.target.innerHTML;
             event.target.innerHTML = '<i class="fas fa-check mr-2"></i> Tersalin!';
             event.target.classList.add('bg-green-500');
@@ -1344,12 +1688,22 @@
                 event.target.innerHTML = originalText;
                 event.target.classList.remove('bg-green-500');
             }, 2000);
+            
+            // Vibrate on mobile if supported
+            if (navigator.vibrate) {
+                navigator.vibrate([50]);
+            }
         }
 
-        // Toggle Envelope - FUNGSI YANG DIPERBAIKI
+        // Toggle Envelope - Mobile optimized
         function toggleEnvelope() {
             const envelope = document.getElementById('envelope');
             envelope.classList.toggle('open');
+            
+            // Vibrate on mobile if supported
+            if (navigator.vibrate) {
+                navigator.vibrate([30]);
+            }
             
             // Reset scroll position
             setTimeout(() => {
@@ -1362,8 +1716,8 @@
             if (envelope.classList.contains('open')) {
                 // Confetti when envelope opens
                 confetti({
-                    particleCount: 30,
-                    spread: 60,
+                    particleCount: 20,
+                    spread: 50,
                     origin: { y: 0.6 },
                     colors: ['#f5d76e', '#f8a5c2']
                 });
@@ -1380,7 +1734,7 @@
 
         // View More Photos
         function viewMorePhotos() {
-            alert("Fitur galeri lengkap akan tersedia setelah acera pernikahan. Terima kasih!");
+            alert("Fitur galeri lengkap akan tersedia setelah acara pernikahan. Terima kasih!");
         }
 
         // RSVP Selection
@@ -1393,10 +1747,15 @@
             
             // Add selected class to clicked option
             event.currentTarget.classList.add('selected');
-            event.currentTarget.style.transform = 'translateY(-3px)';
+            event.currentTarget.style.transform = 'translateY(-2px)';
             
             // Set hidden input value
             document.getElementById('attendance').value = value;
+            
+            // Vibrate on mobile if supported
+            if (navigator.vibrate) {
+                navigator.vibrate([30]);
+            }
         }
 
         // RSVP Form Submission
@@ -1433,28 +1792,45 @@
             // Confetti for attending guests
             if (attendance === 'yes') {
                 confetti({
-                    particleCount: 50,
-                    spread: 70,
+                    particleCount: 30,
+                    spread: 60,
                     origin: { y: 0.6 },
                     colors: ['#f5d76e', '#f8a5c2']
                 });
             }
             
+            // Vibrate on mobile if supported
+            if (navigator.vibrate) {
+                navigator.vibrate([50, 30, 50]);
+            }
+            
             return false;
         }
 
-        // Particles Configuration
+        // Mobile-optimized particles configuration
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "number": { 
+                    "value": window.innerWidth < 768 ? 40 : 60, 
+                    "density": { 
+                        "enable": true, 
+                        "value_area": window.innerWidth < 768 ? 600 : 800 
+                    } 
+                },
                 "color": { "value": ["#f5d76e", "#f8a5c2", "#ffffff"] },
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.5, "random": true },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#f5d76e", "opacity": 0.2, "width": 1 },
+                "opacity": { "value": 0.4, "random": true },
+                "size": { "value": window.innerWidth < 768 ? 2 : 3, "random": true },
+                "line_linked": { 
+                    "enable": window.innerWidth >= 768, 
+                    "distance": 120, 
+                    "color": "#f5d76e", 
+                    "opacity": 0.2, 
+                    "width": 1 
+                },
                 "move": { 
                     "enable": true, 
-                    "speed": 1, 
+                    "speed": window.innerWidth < 768 ? 0.8 : 1, 
                     "direction": "none", 
                     "random": true, 
                     "straight": false, 
@@ -1465,8 +1841,14 @@
             "interactivity": {
                 "detect_on": "canvas",
                 "events": {
-                    "onhover": { "enable": true, "mode": "grab" },
-                    "onclick": { "enable": true, "mode": "push" }
+                    "onhover": { 
+                        "enable": window.innerWidth >= 768, 
+                        "mode": "grab" 
+                    },
+                    "onclick": { 
+                        "enable": true, 
+                        "mode": "push" 
+                    }
                 }
             }
         });
@@ -1482,45 +1864,61 @@
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 80,
+                        top: targetElement.offsetTop - 70,
                         behavior: 'smooth'
                     });
                 }
             });
         });
 
-        // Auto-play music after 5 seconds if user opens invitation
+        // Auto-play music after 5 seconds if user opens invitation (with user gesture requirement)
         setTimeout(() => {
             if (!audio.paused) return;
             
             // Check if invitation is opened
             const overlay = document.getElementById('cover-overlay');
             if (overlay.style.display === 'none' || overlay.style.transform === 'translateY(-100%)') {
-                // Fade in audio
+                // Try to play audio with low volume
                 audio.volume = 0;
-                audio.play();
-                
-                const fadeIn = setInterval(() => {
-                    if (audio.volume < 0.5) {
-                        audio.volume += 0.05;
-                    } else {
-                        clearInterval(fadeIn);
-                    }
-                }, 100);
+                audio.play().then(() => {
+                    // Fade in audio
+                    const fadeIn = setInterval(() => {
+                        if (audio.volume < 0.3) {
+                            audio.volume += 0.05;
+                        } else {
+                            clearInterval(fadeIn);
+                        }
+                    }, 100);
+                }).catch(e => {
+                    console.log("Background audio play prevented");
+                });
             }
         }, 5000);
         
-        // PERBAIKAN: Fungsi untuk memastikan amplop terbuka dengan benar
+        // Adjust envelope size based on content and screen size
         function adjustEnvelopeForContent() {
             const envelope = document.getElementById('envelope');
             const loveLetter = envelope.querySelector('.love-letter');
             
-            if (loveLetter && loveLetter.scrollHeight > loveLetter.clientHeight) {
-                // Jika konten terlalu panjang, atur height amplop
-                const newHeight = Math.min(loveLetter.scrollHeight + 60, 500); // Max 500px
+            if (loveLetter) {
+                // Calculate appropriate height based on content and screen size
+                const contentHeight = loveLetter.scrollHeight;
+                const screenWidth = window.innerWidth;
+                
+                let maxHeight;
+                if (screenWidth < 480) {
+                    maxHeight = 260;
+                } else if (screenWidth < 768) {
+                    maxHeight = 300;
+                } else {
+                    maxHeight = 320;
+                }
+                
+                // Set height to fit content but not exceed max
+                const newHeight = Math.min(contentHeight + 40, maxHeight);
                 envelope.style.height = newHeight + 'px';
                 
-                // Pastikan amplop-back memiliki height yang sama
+                // Ensure envelope-back has same height
                 const envelopeBack = envelope.querySelector('.envelope-back');
                 if (envelopeBack) {
                     envelopeBack.style.height = '100%';
@@ -1528,15 +1926,84 @@
             }
         }
         
-        // Jalankan setelah halaman dimuat
+        // Mobile menu toggle for small screens
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu) {
+                menu.classList.toggle('hidden');
+            }
+        }
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('mobile-menu');
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            
+            if (menu && menuBtn && !menu.contains(e.target) && !menuBtn.contains(e.target)) {
+                menu.classList.add('hidden');
+            }
+        });
+        
+        // Handle orientation change
+        window.addEventListener('orientationchange', function() {
+            // Refresh AOS on orientation change
+            setTimeout(() => {
+                AOS.refresh();
+                adjustEnvelopeForContent();
+            }, 300);
+        });
+        
+        // Handle window resize
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                adjustEnvelopeForContent();
+                AOS.refresh();
+            }, 250);
+        });
+        
+        // Initialize on load
         window.addEventListener('load', function() {
-            // Atur ukuran amplop berdasarkan konten
+            // Adjust envelope size
             setTimeout(adjustEnvelopeForContent, 500);
             
-            // Tambahkan event listener untuk resize window
-            window.addEventListener('resize', adjustEnvelopeForContent);
+            // Add loaded class to body for CSS transitions
+            document.body.classList.add('loaded');
+            
+            // Check if on mobile and add touch-specific classes
+            if ('ontouchstart' in window || navigator.maxTouchPoints) {
+                document.body.classList.add('touch-device');
+            }
+            
+            // Initialize particles with correct density
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS.load('particles-js', null, function() {
+                    console.log('Particles loaded');
+                });
+            }
+        });
+        
+        // Prevent zoom on double tap for mobile
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+        
+        // Improved touch handling for buttons
+        document.querySelectorAll('.accent-button, .glass-card').forEach(button => {
+            button.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            
+            button.addEventListener('touchend', function() {
+                this.style.transform = '';
+            });
         });
     </script>
 </body>
 </html>
-
